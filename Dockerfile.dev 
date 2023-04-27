@@ -1,6 +1,7 @@
-FROM node:latest
+FROM node:lts
 WORKDIR /app
-COPY package.json ./
+COPY package.json /app
 RUN npm install
-COPY . .
-CMD ["npm", "start"]
+COPY . /app
+CMD node server.js
+EXPOSE 3001
