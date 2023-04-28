@@ -93,11 +93,10 @@ export default function LoginForm() {
     setLoading(true);
 
     form.current.validateAll();
-    console.log(checkBtn)
-    if (checkBtn.current.context._errors.length === 0) {
+
       AuthService.login(username, password).then(
         () => {
-          navigate("/profile");
+          navigate("/app");
           window.location.reload();
         },
         (error) => {
@@ -113,9 +112,7 @@ export default function LoginForm() {
           setMessage(resMessage);
         }
       );
-    } else {
-      setLoading(false);
-    }
+   
   };
 
   const changeMode = () =>{
@@ -125,12 +122,14 @@ export default function LoginForm() {
   const handleRegister = (e) => {
     e.preventDefault();
 
+    console.log(checkBtn.current.context._errors.length);
+
     setMessage("");
     setSuccessful(false);
-
     form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
+    
+
       AuthService.register(username, email, password).then(
         (response) => {
           setMessage(response.data.message);
@@ -148,7 +147,7 @@ export default function LoginForm() {
           setSuccessful(false);
         }
       );
-    }
+    
   };
 
   
